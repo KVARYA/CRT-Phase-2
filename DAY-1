@@ -1,1 +1,56 @@
+53. Maximum Subarray
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int n = nums.size();
+        int maxSum = INT_MIN;
+        int sum = 0;
+        for(int i= 0; i<n; i++) {
+            sum += nums[i];
+            maxSum = max(maxSum, sum);
+            if(sum <0) sum =0;
+        }
 
+        return maxSum;
+    }
+};
+
+
+///////////////////////////////////////////////////
+Maximum Sub Array
+// User function template for C++
+class Solution {
+  public:
+    vector<int> findSubarray(vector<int>& arr) {
+        // code here
+        int n = arr.size();
+        int maxSum = 0, st, end;
+        int sum = 0, currst=0, currend=0;
+        for(int i =0; i<n; i++) {
+            if(arr[i] <0) {
+                sum =0;
+                currst = i+1;
+            }else {
+                sum += arr[i];
+                currend = i;
+                
+            }
+            if(sum > maxSum) {
+                maxSum = sum;
+                st=currst;
+                end=currend;
+            }
+            else if(sum == maxSum  && (currend-currst+1) > (end-st+1)) {
+                st=currst;
+                end=currend;
+            }
+        }
+        if(maxSum == 0) return {-1}; 
+        vector<int> ans;
+        
+        for(int i =st; i<=end; i++) {
+            ans.push_back(arr[i]);
+        }
+        return ans;
+    }
+}; 
