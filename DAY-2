@@ -63,3 +63,21 @@ public:
         return -1;
     }
 };
+
+///////////////////////////////////////////////////////////////////////////
+41. First Missing Positive
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        int n = nums.size();
+        unordered_set<int> st;
+        for(int i : nums) {
+            st.insert(i);
+        }
+        for(int i =1; i<=n; i++) {
+            if(st.find(i) == st.end())
+             return i;
+        }
+        return n+1;
+    }
+};
