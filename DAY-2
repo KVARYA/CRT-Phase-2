@@ -23,4 +23,25 @@ public:
 };
 
 ////////////////////////////////////////////////////////////
+2149. Rearrange Array Elements by Sign
+class Solution {
+public:
+    vector<int> rearrangeArray(vector<int>& nums) {
+        int s = nums.size();
+        int p = 0;
+        int n = 1;
+        vector<int> result(s);
+        for(int num : nums) {
+            if(num>0) {
+                result[p] = num;
+                p += 2;
+            }else {
+                result[n] = num;
+                n += 2;
+            }
+            
+        }
+        return result;
+    }
+};
 
