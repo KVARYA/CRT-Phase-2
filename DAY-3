@@ -26,5 +26,30 @@ public:
                 return false;
         }
         return true;
+
+///////////////////////////////////
+643. Maximum Average Subarray I
+class Solution {
+public:
+    double findMaxAverage(vector<int>& nums, int k) {
+        int n = nums.size();
+        int l = 0, r = 0;
+        double maxAvg = INT_MIN, sum = 0;
+
+        while (r < n) {
+            sum += nums[r];
+
+            if (r - l + 1 == k) {
+                maxAvg = max(maxAvg, sum / k);
+                sum -= nums[l];
+                l++;
+            }
+            r++;
+        }
+
+        return maxAvg;
+    }
+};
+
     }
 };
