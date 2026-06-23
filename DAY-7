@@ -168,3 +168,44 @@ public:
         return a;
     }
 };
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+23. Merge k Sorted Lists
+class Solution {
+public:
+    ListNode* mergeTwoSortedList(ListNode* l1, ListNode* l2) {
+        if(!l1) return l2;
+        if(!l2) return l1;
+
+        if(l1->val <= l2->val) {
+            l1->next = mergeTwoSortedList(l1->next, l2);
+            return l1;
+        }else {
+            l2->next = mergeTwoSortedList(l1, l2->next);
+            return l2;
+        }
+        return NULL;
+    }
+    
+    ListNode* MergeSORT(int low, int high, vector<ListNode*>& lists) {
+        if(low == high) {
+            return lists[low];
+        }
+        int mid = low+(high - low)/2;
+
+        ListNode* L1 = MergeSORT(low,mid, lists);
+        ListNode* L2 = MergeSORT(mid+1, high, lists);
+
+        return mergeTwoSortedList(L1, L2);
+       
+    }
+    ListNode* mergeKLists(vector<ListNode*>& lists) {  
+        int k = lists.size();
+
+        if(k==0)
+        return NULL;
+
+        return  MergeSORT(0, k-1, lists); 
+                 
+    }
+};
