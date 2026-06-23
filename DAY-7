@@ -50,3 +50,15 @@ public:
         return head;
     }
 };
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+237. Delete Node in a Linked List
+class Solution {
+public:
+    void deleteNode(ListNode* node) {
+        node->val = node->next->val;
+        ListNode* prev = node->next;
+        node->next = node->next->next;
+    }
+};
