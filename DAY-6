@@ -116,3 +116,20 @@ public:
         return mergeSort(head);
     }
 };
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+83. Remove Duplicates from Sorted List
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        ListNode* temp=head;
+        while(temp!=NULL && temp->next!=NULL){
+            if(temp->next->val==temp->val){
+                ListNode* node=temp->next;
+                temp->next=temp->next->next;
+                delete node;
+            }
+            else temp=temp->next;
+        }
+        return head;
+    }
+};
