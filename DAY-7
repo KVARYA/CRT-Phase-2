@@ -1,1 +1,21 @@
-
+82. Remove Duplicates from Sorted List II
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        map<int, int> mp;
+        while(head) {
+            mp[head->val]++;
+            head= head->next; 
+        }
+        ListNode dummy(0);
+        ListNode* ptr = &dummy;
+        for(auto i: mp) {
+            if(i.second == 1) {
+                ptr->next = new ListNode(i.first);
+                ptr= ptr->next;
+                
+            }
+        }
+        return dummy.next;
+    }
+};
