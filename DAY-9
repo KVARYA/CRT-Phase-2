@@ -108,3 +108,21 @@ public:
         return count;
     }
 };
+optimal approach 
+class Solution {
+public:
+    int trap(vector<int>& arr) {
+        int n = arr.size();
+        int lmax=INT_MIN, rmax= INT_MIN;
+        int l =0, r = n-1;
+        int count = 0;
+        while (l<r) {
+            lmax = max(arr[l], lmax);
+            rmax = max(arr[r],rmax);
+            count += (lmax<rmax) ? lmax-arr[l++] : rmax-arr[r--];
+
+        }
+        
+        return count;
+    }
+};
