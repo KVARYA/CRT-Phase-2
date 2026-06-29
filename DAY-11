@@ -1,1 +1,19 @@
-
+class Solution {
+    TreeNode* treeBanao(unordered_map<int, int> &map, vector<int> &inorder, int inst, int inend, vector<int>preorder, int prest, int preend ) {
+        if(inst>inend || prest>preend) return nullptr;
+        TreeNode* root =  new TreeNode(preorder[prest]);
+        int rootIndex = map[root->val];
+        int leftSize = rootIndex - inst;
+        root->left= treeBanao(map, inorder, inst, rootIndex-1, preorder, prest+1, prest+leftSize);
+        root->right = treeBanao(map, inorder, rootIndex+1, inend, preorder, prest+leftSize+1, preend);
+        return root;
+    }
+public:
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        unordered_map<int, int> map;
+        for(int i =0; i<inorder.size(); i++) {
+            map[inorder[i]] = i;
+        }
+        return treeBanao(map, inorder,0, inorder.size()-1, preorder, 0, preorder.size()-1);
+    }
+};
