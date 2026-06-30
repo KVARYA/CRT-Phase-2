@@ -121,3 +121,37 @@ public:
         return ans;
     }
 };
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+Topological Sort
+class Solution {
+  public:
+    vector<int> topoSort(int V, vector<vector<int>>& edges) {
+        // code here
+        vector<vector<int>> graph(V);
+        for(auto i: edges) {
+            graph[i[0]].push_back(i[1]);
+        }
+        vector<int> in(V);
+        for(auto i: edges) {
+            in[i[1]]++;
+        }
+        queue<int> q;
+        for(int i=0; i<V; i++) {
+            if(in[i] == 0)
+               q.push(i);
+        }
+        vector<int> ans;
+        while(!q.empty()){
+           int curr = q.front();
+           q.pop();
+           ans.push_back(curr);
+           for(int i : graph[curr]) {
+               in[i]--;
+               if(in[i] == 0) 
+                  q.push(i);
+           }      
+           
+        }
+        return ans;
+    }
+};
