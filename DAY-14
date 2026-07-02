@@ -59,3 +59,26 @@ public:
         return ans;
     }
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+46. Permutations
+class Solution {
+    void solve(vector<int> &arr, int i, int n, vector<vector<int>> &ans) {
+        if(i == n) {
+            ans.push_back(arr);
+            return;
+        }
+        for(int j =i; j<n; j++) {
+            swap(arr[i], arr[j]);
+            solve(arr, i+1,n, ans);
+            swap(arr[i], arr[j]);
+        }
+    }
+public:
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> ans;
+        solve(nums, 0, nums.size(), ans);
+        return ans;
+
+    }
+};
